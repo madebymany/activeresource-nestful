@@ -6,8 +6,16 @@ require "active_resource"
 module ActiveResource
   module Nestful
     class Base < ActiveResource::Base    
-      class << self      
-        def oauth
+      class << self
+        
+        def oauth(options = nil)
+          @oauth = options if options
+          
+          if block_given?
+            yield
+            @oauth = nil
+          end
+          
           if defined?(@oauth)
             @oauth
           elsif superclass != Object && 
@@ -16,15 +24,8 @@ module ActiveResource
             superclass.oauth.dup.freeze
           end
         end
-      
-        def oauth=(options)
-          @connection = nil
-          @oauth = oauth
-          if block_given?
-            yield
-            @oauth = nil
-          end
-        end
+        
+        alias_method :oauth=, :oauth
         
         def format=(mime_type_reference_or_format)
           format = mime_type_reference_or_format.is_a?(Symbol) ?
