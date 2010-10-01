@@ -1,0 +1,14 @@
+= activeresource-nestful
+
+Usage:
+
+require "active_resource/nestful"
+
+class Post < ActiveResource::Nestful
+end
+
+== Copyright
+
+Copyright (c) 2010 Made By Many. 
+
+Released under the MIT license.
