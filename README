@@ -4,8 +4,10 @@ Usage:
 
 require "active_resource/nestful"
 
-class Post < ActiveResource::Nestful
+class Post < ActiveResource::Nestful::Base
 end
+
+See the examples folder for more usage cases.
 
 == Copyright
 
