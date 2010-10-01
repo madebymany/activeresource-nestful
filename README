@@ -1,11 +1,16 @@
 = activeresource-nestful
 
+Nestful extension to ActiveResource, basically replacing ActiveResource's net/http
+connection with Nestful. This gives you a few really useful things:
+* OAuth support
+* Multipart uploads
+
 Usage:
 
-require "active_resource/nestful"
+  require "active_resource/nestful"
 
-class Post < ActiveResource::Nestful::Base
-end
+  class Post < ActiveResource::Nestful::Base
+  end
 
 See the examples folder for more usage cases.
 
