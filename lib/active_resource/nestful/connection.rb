@@ -7,39 +7,7 @@ module ActiveResource
         @site    = site
         @options[:format] = format
       end
-  
-      def site=(site)
-        @site = site
-      end
-  
-      def timeout=(timeout)
-        @options[:timeout] = options
-      end
-  
-      def ssl_options=(options)
-        @options[:ssl_options] = options
-      end
-  
-      def user=(user)
-        @options[:user] = user
-      end
-  
-      def password=(password)
-        @options[:password] = password
-      end
-  
-      def auth_type=(type)
-        @options[:auth_type] = type
-      end
-  
-      def proxy=(proxy)
-        @options[:proxy] = proxy
-      end
     
-      def oauth=(options)
-        @options[:oauth] = options
-      end
-  
       def get(path, headers = {})
         request(path, :headers => headers).execute
       end
@@ -58,6 +26,14 @@ module ActiveResource
   
       def head(path, headers = {})
         request(path, :method => :head, :headers => headers).execute
+      end
+      
+      def method_missing(name, *args)
+        if name.to_s =~ /=$/
+          @options[$`.to_sym] = args.first
+        else
+          super
+        end
       end
   
       private
