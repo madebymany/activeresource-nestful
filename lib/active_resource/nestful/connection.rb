@@ -38,9 +38,7 @@ module ActiveResource
   
       private
         def request(path, options = {})
-          address      = @site.dup
-          address.path = path
-          ::Nestful::Request.new(address, options.merge(@options))
+          ::Nestful::Request.new(@site.dup + path, options.merge(@options))
         end
     end
   end
