@@ -30,6 +30,8 @@ module ActiveResource
         def format=(mime_type_reference_or_format)
           format = mime_type_reference_or_format.is_a?(Symbol) ?
             ::Nestful::Formats[mime_type_reference_or_format] : mime_type_reference_or_format
+          
+          format = format.new
 
           write_inheritable_attribute(:format, format)
           connection.format = format if site
