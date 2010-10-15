@@ -66,3 +66,4 @@ module ActiveResource
 end # ActiveResource
 
 require File.join(File.dirname(__FILE__), *%w[nestful connection])
+require File.join(File.dirname(__FILE__), *%w[nestful formats multipart])
