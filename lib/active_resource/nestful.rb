@@ -55,8 +55,10 @@ module ActiveResource
         end
       end
       
-      def encode(options = {})
-        self.class.format.encode(attributes, options)
+      def to_multipart_form(options={})
+        self.class.format.encode({
+          self.class.element_name => serializable_hash(options)
+        })
       end
     end # Base
   end # Nestful
