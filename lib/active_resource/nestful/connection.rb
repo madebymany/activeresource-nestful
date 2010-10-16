@@ -16,7 +16,7 @@ module ActiveResource
       end
     
       def get(path, headers = {})
-        request(path, :headers => headers)
+        format.decode(request(path, :headers => headers).body)
       end
   
       def delete(path, headers = {})
@@ -38,6 +38,8 @@ module ActiveResource
       def method_missing(name, *args)
         if name.to_s =~ /=$/
           @options[$`.to_sym] = args.first
+        elsif @options.has_key?(name)
+          @options[name]
         else
           super
         end
