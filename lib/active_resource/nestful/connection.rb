@@ -46,6 +46,10 @@ module ActiveResource
       end
   
       private
+        def format
+          @options[:format]
+        end
+      
         def request(path, options = {})
           request = ::Nestful::Request.new(@site.dup + path, options.merge(@options))
           Result.new(request.execute)
