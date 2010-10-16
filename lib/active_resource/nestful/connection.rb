@@ -12,6 +12,7 @@ module ActiveResource
       def initialize(site, format = :xml)
         @options = {}
         @site    = site
+        @options[:raw]    = true
         @options[:format] = format
       end
     
