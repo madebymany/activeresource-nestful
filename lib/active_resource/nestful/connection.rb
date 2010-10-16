@@ -16,23 +16,23 @@ module ActiveResource
       end
     
       def get(path, headers = {})
-        request(path, :headers => headers).execute
+        request(path, :headers => headers)
       end
   
       def delete(path, headers = {})
-        request(path, :method => :delete, :headers => headers).execute
+        request(path, :method => :delete, :headers => headers)
       end
   
       def put(path, body = '', headers = {})
-        request(path, :method => :put, :body => body, :headers => headers).execute
+        request(path, :method => :put, :body => body, :headers => headers)
       end
   
       def post(path, body = '', headers = {})
-        request(path, :method => :post, :body => body, :headers => headers).execute
+        request(path, :method => :post, :body => body, :headers => headers)
       end
   
       def head(path, headers = {})
-        request(path, :method => :head, :headers => headers).execute
+        request(path, :method => :head, :headers => headers)
       end
       
       def method_missing(name, *args)
@@ -45,7 +45,8 @@ module ActiveResource
   
       private
         def request(path, options = {})
-          Result.new(::Nestful::Request.new(@site.dup + path, options.merge(@options)))
+          request = ::Nestful::Request.new(@site.dup + path, options.merge(@options))
+          Result.new(request.execute)
         end
     end
   end
