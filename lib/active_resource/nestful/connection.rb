@@ -1,14 +1,6 @@
 module ActiveResource
   module Nestful
-    class Connection
-      class Result
-        attr_reader :body
-        
-        def initialize(body)
-          @body = body
-        end
-      end
-  
+    class Connection  
       def initialize(site, format = :xml)
         @options = {}
         @site    = site
@@ -52,8 +44,7 @@ module ActiveResource
         end
       
         def request(path, options = {})
-          request = ::Nestful::Request.new(@site.dup + path, options.merge(@options))
-          Result.new(request.execute)
+          ::Nestful::Request.new(@site.dup + path, options.merge(@options)).execute
         end
     end
   end
