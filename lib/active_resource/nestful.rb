@@ -77,5 +77,19 @@ module ActiveResource
   end # Nestful
 end # ActiveResource
 
+# NOTE: ActiveResource uses 422 to throw errors on object create / update
+# and these errors are json in the body content. We need to make sure that
+# we read the body content of any 422 errors. Easiest place to do this
+# given nestful's architecture is in the initialize of the 422 (ResourceInvalid)
+# exception itself.
+module ::Nestful
+  class ResourceInvalid
+    def initialize(response, message = nil)
+      super
+      @response.read_body
+    end
+  end
+end
+
 require File.join(File.dirname(__FILE__), *%w[nestful connection])
 require File.join(File.dirname(__FILE__), *%w[nestful formats multipart])
