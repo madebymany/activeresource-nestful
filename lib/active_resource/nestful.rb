@@ -61,8 +61,8 @@ module ActiveResource
         })
       end
 
-      def save_with_nestful_validations(options=nil)
-        save_without_nestful_validations(options)
+      def save(options=nil)
+        super
       rescue ::Nestful::ResourceInvalid => e
         # cache the remote errors because every call to <tt>valid?</tt> clears
         # all errors. We must keep a copy to add these back after local
@@ -72,19 +72,16 @@ module ActiveResource
         false
       end
 
-      alias_method_chain :save, :nestful_validations
-
-      def load_remote_errors_with_nestful_formats(remote_errors, save_cache = false)
+      def load_remote_errors(remote_errors, save_cache = false)
         case self.class.format
         when ::Nestful::Formats[:xml]
           errors.from_xml(remote_errors.response.body, save_cache)
         when ::Nestful::Formats[:json]
           errors.from_json(remote_errors.response.body, save_cache)
         else
-          load_remote_errors_without_nestful_formats(remote_errors, save_cache)
+          super
         end
       end
-      alias_method_chain :load_remote_errors, :nestful_formats
     end # Base
   end # Nestful
 end # ActiveResource
