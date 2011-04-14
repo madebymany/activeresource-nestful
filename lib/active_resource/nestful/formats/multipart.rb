@@ -3,9 +3,24 @@ require 'action_dispatch/http/upload'
 module Nestful
   module Formats
     class MultipartFormat < Format
+      cattr_accessor :decode_format
       def extension
         "multipart_form"
       end
+
+      def decode_with_format_choice(body)
+        if self.class.decode_format.present?
+          formatter = ::Nestful::Formats[self.class.decode_format]
+          if formatter.nil?
+            decode_without_format_choice(body)
+          else
+            formatter.new.decode(body)
+          end
+        else
+          decode_without_format_choice(body)
+        end
+      end
+      alias_method_chain :decode, :format_choice
 
       protected
         def looks_like_a_file_with_actiondispatch_uploads?(value)
