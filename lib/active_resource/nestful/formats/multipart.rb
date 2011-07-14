@@ -23,7 +23,7 @@ module Nestful
       alias_method_chain :decode, :format_choice
 
       def looks_like_a_file?(value)
-        value.is_a?(File) || value.is_a?(StringIO) || value.is_a?(Tempfile)¬
+        value.is_a?(File) || value.is_a?(StringIO) || value.is_a?(Tempfile)
       end¬
 
       protected
