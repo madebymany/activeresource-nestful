@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{activeresource-nestful}
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alex MacCaw"]
@@ -28,14 +28,14 @@ Gem::Specification.new do |s|
      "lib/active_resource/nestful.rb",
      "lib/active_resource/nestful/connection.rb"
   ]
-  s.homepage = %q{http://github.com/maccman/nestful-resource}
+  s.homepage = %q{http://github.com/madebymany/activeresource-nestful}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Nestify ActiveResource}
   s.test_files = [
     "examples/oauth.rb",
-     "examples/post.rb"
+    "examples/post.rb"
   ]
 
   if s.respond_to? :specification_version then
