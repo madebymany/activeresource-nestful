@@ -78,6 +78,15 @@ module ActiveResource
           errors.from_xml(remote_errors.response.body, save_cache)
         when ::Nestful::Formats[:json]
           errors.from_json(remote_errors.response.body, save_cache)
+        when ::Nestful::Formats[:multipart]
+          case self.class.format.decode_format
+          when :xml
+            errors.from_xml(remote_errors.response.body, save_cache)
+          when :json
+            errors.from_json(remote_errors.response.body, save_cache)
+          else
+            super
+          end
         else
           super
         end
