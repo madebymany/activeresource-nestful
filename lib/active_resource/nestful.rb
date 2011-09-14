@@ -58,7 +58,7 @@ module ActiveResource
       def to_multipart_form(options={})
         existing_format = self.class.format
         self.format = :multipart unless existing_format.is_a? ::Nestful::Formats[:multipart]
-        self.class.format.new.encode({
+        self.class.format.encode({
           self.class.element_name => serializable_hash(options)
         })
       ensure
