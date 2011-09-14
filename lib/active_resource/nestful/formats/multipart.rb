@@ -23,6 +23,14 @@ module Nestful
       alias_method_chain :decode, :format_choice
 
       protected
+        def encode_value(key, value)
+          if value.respond_to?(:serializable_hash)
+            to_multipart(value.serializable_hash, key)
+          else
+            super(key, value)
+          end
+        end
+
         def looks_like_a_file_with_actiondispatch_uploads?(value)
           looks_like_a_file_without_actiondispatch_uploads?(value) || value.is_a?(ActionDispatch::Http::UploadedFile)
         end
