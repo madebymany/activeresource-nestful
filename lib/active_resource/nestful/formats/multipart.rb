@@ -30,7 +30,7 @@ module Nestful
             encode_value_without_nested_serializable_hashing(key, value)
           end
         end
-        alias_method_chain :encode_value, :serializable_hashing
+        alias_method_chain :encode_value, :nested_serializable_hashing
 
         def looks_like_a_file_with_actiondispatch_uploads?(value)
           looks_like_a_file_without_actiondispatch_uploads?(value) || value.is_a?(ActionDispatch::Http::UploadedFile)
