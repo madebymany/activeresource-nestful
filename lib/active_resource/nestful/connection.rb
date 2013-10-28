@@ -1,8 +1,8 @@
 module ActiveResource
   module Nestful
     class Connection  
-      def initialize(site, format = :xml)
-        @options = {}
+      def initialize(site, format = :xml, options = {})
+        @options = options
         @site    = site
         @options[:raw]    = true
         @options[:format] = format
